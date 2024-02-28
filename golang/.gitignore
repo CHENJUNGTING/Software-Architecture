@@ -1,7 +1,0 @@
-# temp files
-*~
-*.orig
-
-# binaries
-/task
-/bin/*

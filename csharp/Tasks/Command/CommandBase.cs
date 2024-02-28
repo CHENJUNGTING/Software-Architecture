@@ -1,0 +1,36 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace Tasks.Command
+{
+    public abstract class CommandBase
+    {
+        protected static IDictionary<string, IList<Task>> tasks = TaskList.GetTasks();
+        protected static IConsole console = TaskList.GetConsole();
+        public abstract void Execute();
+
+        protected Task GetTaskById(string id)
+        {
+            var identifiedTask = tasks
+                .Select(project => project.Value.FirstOrDefault(task => task.Id == id))
+                .Where(task => task != null)
+                .FirstOrDefault();
+
+            return identifiedTask;
+        }
+        protected void SetDone(string id, bool done)
+        {
+            var identifiedTask = GetTaskById(id);
+
+            if (identifiedTask == null)
+            {
+                console.WriteLine("Could not find a task with an ID of {0}.", id);
+                return;
+            }
+
+            identifiedTask.Done = done;
+        }
+    }
+}

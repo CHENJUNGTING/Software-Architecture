@@ -36,50 +36,51 @@ namespace Tasks
 		[Test, Timeout(1000)]
 		public void ItWorks()
 		{
-			Execute("show");
+			string dateTime = DateTime.Now.ToString("yyyy/MM/dd");
+			Execute("view by project");
 
 			Execute("add project secrets");
-			Execute("add task secrets Eat more donuts.");
-			Execute("add task secrets Destroy all humans.");
+			Execute("add task id1 secrets Eat more donuts.");
+			Execute("add task id2 secrets Destroy all humans.");
 
-			Execute("show");
+			Execute("view by project");
 			ReadLines(
 				"secrets",
-				"    [ ] 1: Eat more donuts.",
-				"    [ ] 2: Destroy all humans.",
+				"    [ ] id1: Eat more donuts.: " + dateTime,
+				"    [ ] id2: Destroy all humans.: " + dateTime,
 				""
 			);
-
+            
 			Execute("add project training");
-			Execute("add task training Four Elements of Simple Design");
-			Execute("add task training SOLID");
-			Execute("add task training Coupling and Cohesion");
-			Execute("add task training Primitive Obsession");
-			Execute("add task training Outside-In TDD");
-			Execute("add task training Interaction-Driven Design");
+			Execute("add task id3 training Four Elements of Simple Design");
+			Execute("add task id4 training SOLID");
+			Execute("add task id5 training Coupling and Cohesion");
+			Execute("add task id6 training Primitive Obsession");
+			Execute("add task id7 training Outside-In TDD");
+			Execute("add task id8 training Interaction-Driven Design");
 
-			Execute("check 1");
-			Execute("check 3");
-			Execute("check 5");
-			Execute("check 6");
+			Execute("check id1");
+			Execute("check id3");
+			Execute("check id5");
+			Execute("check id6");
 
-			Execute("show");
+			Execute("view by project");
 			ReadLines(
 				"secrets",
-				"    [x] 1: Eat more donuts.",
-				"    [ ] 2: Destroy all humans.",
+				"    [x] id1: Eat more donuts.: " + dateTime,
+				"    [ ] id2: Destroy all humans.: " + dateTime,
 				"",
 				"training",
-				"    [x] 3: Four Elements of Simple Design",
-				"    [ ] 4: SOLID",
-				"    [x] 5: Coupling and Cohesion",
-				"    [x] 6: Primitive Obsession",
-				"    [ ] 7: Outside-In TDD",
-				"    [ ] 8: Interaction-Driven Design",
+				"    [x] id3: Four Elements of Simple Design: " + dateTime,
+				"    [ ] id4: SOLID: " + dateTime ,
+				"    [x] id5: Coupling and Cohesion: " + dateTime,
+				"    [x] id6: Primitive Obsession: " + dateTime,
+				"    [ ] id7: Outside-In TDD: " + dateTime,
+				"    [ ] id8: Interaction-Driven Design: " + dateTime,
 				""
 			);
-
-			Execute("quit");
+			
+            Execute("quit");
 		}
 
 		private void Execute(string command)
