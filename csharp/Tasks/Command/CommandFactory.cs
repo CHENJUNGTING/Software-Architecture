@@ -4,13 +4,31 @@ using System.Text;
 
 namespace Tasks.Command
 {
-    interface CommandFactory
+    class CommandFactory : ICommandFactory
     {
-        CommandAdd GetCommandAdd(string commandLine);
-        CommandCheck GetCommandCheck(string commandLine);
-        CommandUncheck GetCommandUncheck(string commandLine);
-        CommandError GetCommandError(string commandLine);
-        CommandHelp GetCommandHelp();
-        CommandView GetCommandView(string commandLine);
+        public CommandBase GetCommandAdd(string commandLine)
+        {
+            return new CommandAdd(commandLine);
+        }
+        public CommandBase GetCommandCheck(string commandLine)
+        {
+            return new CommandCheck(commandLine);
+        }
+        public CommandBase GetCommandUncheck(string commandLine)
+        {
+            return new CommandUncheck(commandLine);
+        }
+        public CommandBase GetCommandError(string commandLine)
+        {
+           return new CommandError(commandLine);
+        }
+        public CommandBase GetCommandHelp()
+        {
+            return new CommandHelp();
+        }
+        public CommandBase GetCommandView(string commandLine)
+        {
+            return new CommandView(commandLine);
+        }
     }
 }

@@ -5,12 +5,11 @@ using System.Text;
 
 namespace Tasks.Command
 {
-    public abstract class CommandBase
+    public abstract class CommandBase : ICommand
     {
+        public abstract void Execute();
         protected static IDictionary<string, IList<Task>> tasks = TaskList.GetTasks();
         protected static IConsole console = TaskList.GetConsole();
-        public abstract void Execute();
-
         protected Task GetTaskById(string id)
         {
             var identifiedTask = tasks

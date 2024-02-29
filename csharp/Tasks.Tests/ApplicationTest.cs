@@ -37,17 +37,17 @@ namespace Tasks
 		public void ItWorks()
 		{
 			string dateTime = DateTime.Now.ToString("yyyy/MM/dd");
-			Execute("view by project");
+			Execute("show");
 
 			Execute("add project secrets");
 			Execute("add task id1 secrets Eat more donuts.");
 			Execute("add task id2 secrets Destroy all humans.");
 
-			Execute("view by project");
+			Execute("show");
 			ReadLines(
 				"secrets",
-				"    [ ] id1: Eat more donuts.: " + dateTime,
-				"    [ ] id2: Destroy all humans.: " + dateTime,
+				"    [ ] id1: Eat more donuts.",
+				"    [ ] id2: Destroy all humans.",
 				""
 			);
             
@@ -64,19 +64,19 @@ namespace Tasks
 			Execute("check id5");
 			Execute("check id6");
 
-			Execute("view by project");
+			Execute("show");
 			ReadLines(
 				"secrets",
-				"    [x] id1: Eat more donuts.: " + dateTime,
-				"    [ ] id2: Destroy all humans.: " + dateTime,
+				"    [x] id1: Eat more donuts." ,
+				"    [ ] id2: Destroy all humans." ,
 				"",
 				"training",
-				"    [x] id3: Four Elements of Simple Design: " + dateTime,
-				"    [ ] id4: SOLID: " + dateTime ,
-				"    [x] id5: Coupling and Cohesion: " + dateTime,
-				"    [x] id6: Primitive Obsession: " + dateTime,
-				"    [ ] id7: Outside-In TDD: " + dateTime,
-				"    [ ] id8: Interaction-Driven Design: " + dateTime,
+				"    [x] id3: Four Elements of Simple Design",
+				"    [ ] id4: SOLID" ,
+				"    [x] id5: Coupling and Cohesion",
+				"    [x] id6: Primitive Obsession",
+				"    [ ] id7: Outside-In TDD",
+				"    [ ] id8: Interaction-Driven Design",
 				""
 			);
 			

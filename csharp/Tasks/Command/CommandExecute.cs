@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Tasks.Command
 {
-    class CommandExecute : ICommand
+    class CommandExecute : ICommandExecute
     {
-        CommandFactoryImp CommandFactoryImp = new CommandFactoryImp();
+        CommandFactory CommandFactoryImp = new CommandFactory();
         public void Add(string commandLine)
         {
             CommandFactoryImp.GetCommandAdd(commandLine).Execute();
