@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
+using Tasks.MyConsole;
+using Tasks.TaskData;
 namespace Tasks.Command
 {
     public abstract class CommandBase : ICommand

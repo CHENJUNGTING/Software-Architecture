@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Threading.Tasks;
-
+using Tasks.MyConsole;
+using Tasks.TaskData;
 namespace Tasks.Command
 {
     public class CommandAdd : CommandBase

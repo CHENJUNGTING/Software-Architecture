@@ -6,7 +6,7 @@ namespace Tasks.Command
 {
     class CommandExecute : ICommandExecute
     {
-        CommandFactory CommandFactoryImp = new CommandFactory();
+        ICommandFactory CommandFactoryImp = new CommandFactory();
         public void Add(string commandLine)
         {
             CommandFactoryImp.GetCommandAdd(commandLine).Execute();

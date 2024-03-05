@@ -3,10 +3,11 @@ using System;
 using System.IO;
 using System.IO.Pipes;
 using System.Threading;
+using Tasks.MyConsole;
 
 namespace Tasks
 {
-	public class FakeConsole : IConsole
+    public class FakeConsole : IConsole
 	{
 		private readonly TextReader inputReader;
 		private readonly TextWriter inputWriter;
