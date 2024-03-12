@@ -1,34 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Text;
 
 namespace Tasks.Command
 {
     class CommandFactory : ICommandFactory
     {
-        public CommandBase GetCommandAdd(string commandLine)
+        public CommandReturnBase GetCommand(CommandList commandType, string commandLine = default)
         {
-            return new CommandAdd(commandLine);
-        }
-        public CommandBase GetCommandCheck(string commandLine)
-        {
-            return new CommandCheck(commandLine);
-        }
-        public CommandBase GetCommandUncheck(string commandLine)
-        {
-            return new CommandUncheck(commandLine);
-        }
-        public CommandBase GetCommandError(string commandLine)
-        {
-           return new CommandError(commandLine);
-        }
-        public CommandBase GetCommandHelp()
-        {
-            return new CommandHelp();
-        }
-        public CommandBase GetCommandView(string commandLine)
-        {
-            return new CommandView(commandLine);
+            
+            switch (commandType)
+            {
+                case CommandList.Add:
+                    return new CommandAdd(commandLine);
+                case CommandList.Check:
+                    return new CommandCheck(commandLine);
+                case CommandList.UnCheck:
+                    return new CommandUncheck(commandLine);
+                case CommandList.Error:
+                    return new CommandError(commandLine);
+                case CommandList.Help:
+                    return new CommandHelp();
+                case CommandList.View:
+                    return new CommandView(commandLine);
+            }
+            return null;
         }
     }
 }

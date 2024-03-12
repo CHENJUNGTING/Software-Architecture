@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Tasks.Command
 {
-    public class CommandView : CommandBase
+    public class CommandView : CommandReturnBase
     {
         private string commandLine = string.Empty;
-        public override void Execute()
+        public override void RealExecute()
         {
             ViewByProject();
         }
@@ -54,13 +54,13 @@ namespace Tasks.Command
         {
             foreach (var project in tasks)
             {
-                console.WriteLine(project.Key);
+                commandReturnMessage.AddMessage(project.Key);
                 foreach (var task in project.Value)
                 {
                     // console.WriteLine("    [{0}] {1}: {2}: {3}", (task.Done ? 'x' : ' '), task.Id, task.Description, task.DeadLine.ToString("yyyy/MM/dd"));
-                    console.WriteLine("    [{0}] {1}: {2}", (task.Done ? 'x' : ' '), task.Id, task.Description);
+                    commandReturnMessage.AddMessage($"    [{(task.Done ? 'x' : ' ')}] {task.Id}: {task.Description}");
                 }
-                console.WriteLine();
+                commandReturnMessage.AddMessage();
             }
         }
     }

@@ -1,8 +1,8 @@
 ﻿
 using System.Collections.Generic;
 using Tasks.Command;
+using Tasks.Execute;
 using Tasks.MyConsole;
-using Tasks.TaskData;
 
 namespace Tasks
 {
@@ -10,18 +10,8 @@ namespace Tasks
     {
         private const string QUIT = "quit";
 
-        private static readonly IDictionary<string, IList<Task>> tasks = new Dictionary<string, IList<Task>>();
-        private readonly CommandExecute cmd = new CommandExecute();
         public static IConsole console { get; private set; }
-
-        public static IDictionary<string, IList<Task>> GetTasks()
-        {
-            return tasks;
-        }
-        public static IConsole GetConsole()
-        {
-            return console;
-        }
+        
         public static void Main(string[] args)
         {
             new TaskList(new RealConsole()).Run();
@@ -34,6 +24,8 @@ namespace Tasks
 
         public void Run()
         {
+            ITaskExecute taskExecute = new TaskExecute();
+            List<string> message = new List<string>();
             while (true)
             {
                 console.Write("> ");
@@ -42,35 +34,14 @@ namespace Tasks
                 {
                     break;
                 }
-                Execute(command);
-            }
-        }
-
-        private void Execute(string commandLine)
-        {
-            var commandRest = commandLine.Split(" ".ToCharArray(), 2);
-            var command = commandRest[0];
-            switch (command)
-            {
-                case "show":
-                    //cmd.show(commandRest[1]);
-                    cmd.Show("");
-                    break;
-                case "add":
-                    cmd.Add(commandRest[1]);
-                    break;
-                case "check":
-                    cmd.Check(commandRest[1]);
-                    break;
-                case "uncheck":
-                    cmd.Uncheck(commandRest[1]);
-                    break;
-                case "help":
-                    cmd.Help();
-                    break;
-                default:
-                    cmd.Error(command);
-                    break;
+                message = taskExecute.Execute(command);
+                if (message != null)
+                {
+                    foreach (var msg in message)
+                    {
+                        console.WriteLine(msg);
+                    }
+                }
             }
         }
         /*

@@ -5,14 +5,14 @@ using Tasks.MyConsole;
 using Tasks.TaskData;
 namespace Tasks.Command
 {
-    public class CommandAdd : CommandBase
+    public class CommandAdd : CommandReturnBase
     {
         private string commandLine = string.Empty;
         public CommandAdd(string cmdL)
         {
             commandLine = cmdL;
         }
-        public override void Execute()
+        public override void RealExecute()
         {
             Add();
         }
@@ -38,13 +38,13 @@ namespace Tasks.Command
         {
             if (!tasks.TryGetValue(project, out IList<Task> projectTasks))
             {
-                Console.WriteLine("Could not find a project with the name \"{0}\".", project);
+                commandReturnMessage.AddMessage($"Could not find a project with the name \"{project}\".");
                 return;
             }
 
             if (int.TryParse(ID, out _))
             {
-                Console.WriteLine("Could not using special characters from the ID. \"{0}\".", ID);
+                commandReturnMessage.AddMessage($"Could not using special characters from the ID. \"{ID}\".");
                 return;
             }
             if (GetTaskById(ID) == null)
@@ -53,7 +53,7 @@ namespace Tasks.Command
             }
             else
             {
-                console.WriteLine("This ID '{0}' is already exist in the Tasks.", ID);
+                commandReturnMessage.AddMessage($"This ID '{ID}' is already exist in the Tasks.");
                 return;
             }
         }

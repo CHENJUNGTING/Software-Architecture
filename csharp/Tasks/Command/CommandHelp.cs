@@ -4,21 +4,21 @@ using System.Text;
 
 namespace Tasks.Command
 {
-    class CommandHelp : CommandBase
+    class CommandHelp : CommandReturnBase
     {
-        public override void Execute()
+        public override void RealExecute()
         {
             Help();
         }
         private void Help()
         {
-            console.WriteLine("Commands:");
-            console.WriteLine("  show");
-            console.WriteLine("  add project <project name>");
-            console.WriteLine("  add task <project name> <task description>");
-            console.WriteLine("  check <task ID>");
-            console.WriteLine("  uncheck <task ID>");
-            console.WriteLine();
+            commandReturnMessage.AddMessage("Commands:");
+            commandReturnMessage.AddMessage("  show");
+            commandReturnMessage.AddMessage("  add project <project name>");
+            commandReturnMessage.AddMessage("  add task <project name> <task description>");
+            commandReturnMessage.AddMessage("  check <task ID>");
+            commandReturnMessage.AddMessage("  uncheck <task ID>");
+            commandReturnMessage.AddMessage();
 
         }
     }

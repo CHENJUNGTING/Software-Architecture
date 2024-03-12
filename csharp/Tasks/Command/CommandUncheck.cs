@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Tasks.Command
 {
-     class CommandUncheck : CommandBase
+     class CommandUncheck : CommandReturnBase
     {
         private string commandLine = string.Empty;
         public CommandUncheck(string cmdL)
@@ -12,7 +12,7 @@ namespace Tasks.Command
             commandLine = cmdL;
         }
 
-        public override void Execute()
+        public override void RealExecute()
         {
             Uncheck();
         }

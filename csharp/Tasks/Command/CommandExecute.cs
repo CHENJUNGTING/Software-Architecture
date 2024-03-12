@@ -1,35 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Tasks.MyConsole;
 
 namespace Tasks.Command
 {
     class CommandExecute : ICommandExecute
     {
         ICommandFactory CommandFactoryImp = new CommandFactory();
-        public void Add(string commandLine)
+        public CommandReturnMessage Add(string commandLine)
         {
-            CommandFactoryImp.GetCommandAdd(commandLine).Execute();
+            return CommandFactoryImp.GetCommand(CommandList.Add, commandLine).Execute();
         }
-        public void Check(string commandLine)
+        public CommandReturnMessage Check(string commandLine)
         {
-            CommandFactoryImp.GetCommandCheck(commandLine).Execute();
+            return CommandFactoryImp.GetCommand(CommandList.Check, commandLine).Execute();
         }
-        public void Uncheck(string commandLine)
+        public CommandReturnMessage Uncheck(string commandLine)
         {
-            CommandFactoryImp.GetCommandUncheck(commandLine).Execute();
+            return CommandFactoryImp.GetCommand(CommandList.UnCheck,commandLine).Execute();
         }
-        public void Help()
+        public CommandReturnMessage Help()
         {
-            CommandFactoryImp.GetCommandHelp().Execute();
+            return CommandFactoryImp.GetCommand(CommandList.Help).Execute();
         }
-        public void Error(string command)
+        public CommandReturnMessage Error(string commandLine)
         {
-            CommandFactoryImp.GetCommandError(command).Execute();
+            return CommandFactoryImp.GetCommand(CommandList.Error, commandLine).Execute();
         }
-        public void Show(string commandLine)
+        public CommandReturnMessage Show(string commandLine)
         {
-            CommandFactoryImp.GetCommandView(commandLine).Execute();
+            return CommandFactoryImp.GetCommand(CommandList.View,commandLine).Execute();
         }
     }
 }
