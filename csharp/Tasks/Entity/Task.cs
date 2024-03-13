@@ -11,9 +11,5 @@ namespace Tasks.Entity
         public string Description { get; set; }
 
         public bool Done { get; set; }
-
-        public DateTime DeadLine { get; set; }
-
-        public DateTime Date { get; set; }
     }
 }
