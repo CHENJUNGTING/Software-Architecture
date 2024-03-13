@@ -1,22 +1,25 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.Design;
 using System.Linq;
-using Tasks.MyConsole;
-using Tasks.TaskData;
-namespace Tasks.Command
+using Tasks.Entity;
+using Tasks.UseCases.Message;
+
+namespace Tasks.UseCases.Command
 {
-    public abstract class CommandReturnBase : ICommandReturn
+    public abstract class CommandBase : ICommand
     {
         private static TaskListData taskListData = new TaskListData();
+        private static int ID = 1;
         protected CommandReturnMessage commandReturnMessage = new CommandReturnMessage();
         protected static IDictionary<string, IList<Task>> tasks = taskListData.GetTasks();
+        
         public abstract void RealExecute();
+        //RealExecute is a Template Method.
         public CommandReturnMessage Execute()
         {
             RealExecute();
             return commandReturnMessage;
         }
-        protected Task GetTaskById(string id)
+        protected Task GetTaskById(int id)
         {
             var identifiedTask = tasks
                 .Select(project => project.Value.FirstOrDefault(task => task.Id == id))
@@ -25,7 +28,7 @@ namespace Tasks.Command
 
             return identifiedTask;
         }
-        protected void SetDone(string id, bool done)
+        protected void SetDone(int id, bool done)
         {
             var identifiedTask = GetTaskById(id);
 
@@ -36,6 +39,10 @@ namespace Tasks.Command
             }
 
             identifiedTask.Done = done;
+        }
+        protected int NextID()
+        {
+            return ID++;
         }
     }
 }

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Tasks.Command;
+using Tasks.UseCases.Command;
 
-namespace Tasks.Execute
+namespace Tasks.Controller
 {
     interface ITaskExecute
     {

@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 
-namespace Tasks.TaskData
+namespace Tasks.Entity
 {
     public class Task
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         public string Description { get; set; }
 

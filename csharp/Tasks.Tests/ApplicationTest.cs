@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using NUnit.Framework;
-using Tasks.TaskData;
 
 namespace Tasks
 {
@@ -41,43 +40,43 @@ namespace Tasks
 			Execute("show");
 
 			Execute("add project secrets");
-			Execute("add task id1 secrets Eat more donuts.");
-			Execute("add task id2 secrets Destroy all humans.");
+			Execute("add task secrets Eat more donuts.");
+			Execute("add task secrets Destroy all humans.");
 
 			Execute("show");
 			ReadLines(
 				"secrets",
-				"    [ ] id1: Eat more donuts.",
-				"    [ ] id2: Destroy all humans.",
+				"    [ ] 1: Eat more donuts.",
+				"    [ ] 2: Destroy all humans.",
 				""
 			);
             
 			Execute("add project training");
-			Execute("add task id3 training Four Elements of Simple Design");
-			Execute("add task id4 training SOLID");
-			Execute("add task id5 training Coupling and Cohesion");
-			Execute("add task id6 training Primitive Obsession");
-			Execute("add task id7 training Outside-In TDD");
-			Execute("add task id8 training Interaction-Driven Design");
+			Execute("add task training Four Elements of Simple Design");
+			Execute("add task training SOLID");
+			Execute("add task training Coupling and Cohesion");
+			Execute("add task training Primitive Obsession");
+			Execute("add task training Outside-In TDD");
+			Execute("add task training Interaction-Driven Design");
 
-			Execute("check id1");
-			Execute("check id3");
-			Execute("check id5");
-			Execute("check id6");
+			Execute("check 1");
+			Execute("check 3");
+			Execute("check 5");
+			Execute("check 6");
 
 			Execute("show");
 			ReadLines(
 				"secrets",
-				"    [x] id1: Eat more donuts." ,
-				"    [ ] id2: Destroy all humans." ,
+				"    [x] 1: Eat more donuts." ,
+				"    [ ] 2: Destroy all humans." ,
 				"",
 				"training",
-				"    [x] id3: Four Elements of Simple Design",
-				"    [ ] id4: SOLID" ,
-				"    [x] id5: Coupling and Cohesion",
-				"    [x] id6: Primitive Obsession",
-				"    [ ] id7: Outside-In TDD",
-				"    [ ] id8: Interaction-Driven Design",
+				"    [x] 3: Four Elements of Simple Design",
+				"    [ ] 4: SOLID" ,
+				"    [x] 5: Coupling and Cohesion",
+				"    [x] 6: Primitive Obsession",
+				"    [ ] 7: Outside-In TDD",
+				"    [ ] 8: Interaction-Driven Design",
 				""
 			);
 			

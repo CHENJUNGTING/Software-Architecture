@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Tasks.Entity;
 using Tasks.MyConsole;
-using Tasks.TaskData;
-namespace Tasks.Command
+namespace Tasks.UseCases.Command
 {
-    public class CommandAdd : CommandReturnBase
+    public class CommandAdd : CommandBase
     {
-        private string commandLine = string.Empty;
+        private string commandRest = string.Empty;
         public CommandAdd(string cmdL)
         {
-            commandLine = cmdL;
+            commandRest = cmdL;
         }
         public override void RealExecute()
         {
@@ -18,7 +18,8 @@ namespace Tasks.Command
         }
         private void Add()
         {
-            var subcommandRest = commandLine.Split(" ".ToCharArray(), 2);
+            
+            var subcommandRest = commandRest.Split(" ".ToCharArray(), 2);
             var subcommand = subcommandRest[0];
             if (subcommand == "project")
             {
@@ -26,27 +27,24 @@ namespace Tasks.Command
             }
             else if (subcommand == "task")
             {
-                var projectTask = subcommandRest[1].Split(" ".ToCharArray(), 3);
-                AddTask(projectTask[0], projectTask[1], projectTask[2]);
+                var projectTask = subcommandRest[1].Split(" ".ToCharArray(), 2);
+                AddTask(projectTask[0], projectTask[1]);
             }
         }
         private void AddProject(string name)
         {
             tasks[name] = new List<Task>();
         }
-        private void AddTask(string ID, string project, string description)
+        private void AddTask(string project, string description)
         {
+            int ID = NextID();
             if (!tasks.TryGetValue(project, out IList<Task> projectTasks))
             {
                 commandReturnMessage.AddMessage($"Could not find a project with the name \"{project}\".");
                 return;
             }
 
-            if (int.TryParse(ID, out _))
-            {
-                commandReturnMessage.AddMessage($"Could not using special characters from the ID. \"{ID}\".");
-                return;
-            }
+
             if (GetTaskById(ID) == null)
             {
                 projectTasks.Add(new Task { Id = ID, Description = description, Done = false, Date = DateTime.Now, DeadLine = DateTime.Now });

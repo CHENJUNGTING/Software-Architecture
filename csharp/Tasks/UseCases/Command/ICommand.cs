@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Tasks.UseCases.Message;
 
-namespace Tasks.Command
+namespace Tasks.UseCases.Command
 {
-    interface ICommandReturn
+    public interface ICommand
     {
         CommandReturnMessage Execute();
     }

@@ -3,18 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Tasks.Command
+namespace Tasks.UseCases.Command
 {
-    public class CommandView : CommandReturnBase
+    public class CommandView : CommandBase
     {
-        private string commandLine = string.Empty;
+        private string commandRest = string.Empty;
         public override void RealExecute()
         {
             ViewByProject();
         }
         public CommandView(string cmdL)
         {
-            commandLine = cmdL;
+            commandRest = cmdL;
         }
         /*
         public List<Task> unPackTasks()

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Tasks.Command
+namespace Tasks.UseCases.Command
 {
-    class CommandHelp : CommandReturnBase
+    class CommandHelp : CommandBase
     {
         public override void RealExecute()
         {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Tasks.TaskData
+namespace Tasks.Entity
 {
     public class TaskListData
     {

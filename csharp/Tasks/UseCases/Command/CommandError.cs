@@ -1,25 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Tasks.TaskData;
 
-namespace Tasks.Command
+namespace Tasks.UseCases.Command
 {
-    class CommandCheck : CommandReturnBase
+    class CommandError : CommandBase
     {
         private string commandLine = string.Empty;
-        public CommandCheck(string cmdL)
+        public CommandError(string cmdL)
         {
             commandLine = cmdL;
         }
         public override void RealExecute()
         {
-            Check();
+            Error();
         }
-        private void Check()
+        private void Error()
         {
-            SetDone(commandLine, true);
+            commandReturnMessage.AddMessage($"I don't know what the command \"{commandLine}\" is.");
         }
-
     }
 }

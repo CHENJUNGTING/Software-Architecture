@@ -2,14 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Tasks.Command
+namespace Tasks.UseCases.Command
 {
-     class CommandUncheck : CommandReturnBase
+    class CommandUncheck : CommandBase
     {
-        private string commandLine = string.Empty;
+        private string commandRest = string.Empty;
         public CommandUncheck(string cmdL)
         {
-            commandLine = cmdL;
+            commandRest = cmdL;
         }
 
         public override void RealExecute()
@@ -18,7 +18,8 @@ namespace Tasks.Command
         }
         private void Uncheck()
         {
-            SetDone(commandLine, false);
+            int iD = Convert.ToInt32(commandRest);
+            SetDone(iD, false);
         }
 
     }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Tasks.Command
+namespace Tasks.UseCases.Message
 {
     public class CommandReturnMessage
     {
@@ -13,7 +13,7 @@ namespace Tasks.Command
         }
         public void AddMessage()
         {
-            this.message.Add("");
+            message.Add("");
         }
         public List<string> GetMessage() { return message; }
 

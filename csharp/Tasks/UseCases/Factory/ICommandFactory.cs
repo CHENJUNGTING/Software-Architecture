@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Tasks.UseCases.Command;
 
-namespace Tasks.Command
+namespace Tasks.UseCases.Factory
 {
     interface ICommandFactory
     {
-        CommandReturnBase GetCommand(CommandList commandType, string commandLine = default);
+        CommandBase GetCommand(string commandLine);
     }
 }
