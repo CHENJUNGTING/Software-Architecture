@@ -1,4 +1,4 @@
-總計為四個資料夾及一個UI進入點(TaskList.cs)   
+為了滿足Clean Architecture 三原則，總計為四個資料夾及一個UI進入點(TaskList.cs)
 - Console    :   
   - 存放Console的I/O操作  
 - Controller :  
