@@ -1,12 +1,13 @@
 ﻿
 using System.Collections.Generic;
 using Tasks.UseCases.Command;
-using Tasks.Controller;
-using Tasks.MyConsole;
+using Tasks.Adapter;
+using Tasks.UseCases.Message;
+using Tasks.IO;
 
 namespace Tasks
 {
-    public sealed class TaskList
+    public sealed class TaskListRun
     {
         private const string QUIT = "quit";
 
@@ -14,10 +15,10 @@ namespace Tasks
         
         public static void Main(string[] args)
         {
-            new TaskList(new RealConsole()).Run();
+            new TaskListRun(new RealConsole()).Run();
         }
 
-        public TaskList(IConsole Pconsole)
+        public TaskListRun(IConsole Pconsole)
         {
             console = Pconsole;
         }
@@ -25,7 +26,7 @@ namespace Tasks
         public void Run()
         {
             ITaskExecute taskExecute = new TaskExecute();
-            List<string> commandReturnMessage = new List<string>();
+            CommandReturnMessage commandReturnMessage = new CommandReturnMessage();
             while (true)
             {
                 console.Write("> ");
@@ -35,7 +36,7 @@ namespace Tasks
                     break;
                 }
                 commandReturnMessage = taskExecute.Execute(command);
-                ShowOutputMessage(commandReturnMessage);
+                ShowOutputMessage(commandReturnMessage.GetMessage());
             }
         }
         private void ShowOutputMessage(List<string> message)

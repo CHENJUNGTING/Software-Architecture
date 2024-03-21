@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Tasks.UseCases.Input
 {
-    class AddTaskInputm<T> : BaseInput<T>
+    public class AddTaskInput : BaseInput
     {
         private string projectName;
         private string description;

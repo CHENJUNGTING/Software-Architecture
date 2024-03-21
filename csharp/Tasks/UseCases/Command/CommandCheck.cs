@@ -12,7 +12,7 @@ namespace Tasks.UseCases.Command
         public override CommandReturnMessage Execute(CheckTaskInput commandInput)
         {
             CommandReturnMessage commandReturnMessage = new CommandReturnMessage();
-            TaskList taskList = TaskList.getTaskList();
+            Entity.TaskList taskList = Entity.TaskList.getTaskList();
             int iD = commandInput.GetID();
             if(taskList.GetTaskById(iD) == null)
             {

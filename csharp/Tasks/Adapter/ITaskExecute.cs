@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Text;
 using Tasks.UseCases.Command;
+using Tasks.UseCases.Message;
 
-namespace Tasks.Controller
+namespace Tasks.Adapter
 {
     interface ITaskExecute
     {
-        List<string> Execute(string command);
+        public CommandReturnMessage Execute(string command);
     }
 }

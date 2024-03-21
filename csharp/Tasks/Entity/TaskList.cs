@@ -17,7 +17,10 @@ namespace Tasks.Entity
         {
             return tasks;
         }
-        private TaskList() { }
+         public int GetID()
+        {
+            return ID;
+        }
         public static TaskList getTaskList()
         {
             if (taskList == null)

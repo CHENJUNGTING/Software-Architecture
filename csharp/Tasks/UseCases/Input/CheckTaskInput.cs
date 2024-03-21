@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Tasks.UseCases.Input
 {
-    class UncheckTaskInput<T> : BaseInput<T>
+    public class UncheckTaskInput : BaseInput
     {
         private int ID;
         public int GetID()

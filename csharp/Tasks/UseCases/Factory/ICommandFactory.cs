@@ -8,8 +8,8 @@ using Tasks.UseCases.Message;
 
 namespace Tasks.UseCases.Factory
 {
-    interface ICommandFactory
+    public interface ICommandFactory<I, O>  where I : ICommandInput where O : CommandReturnMessage
     {
-        CommandBase<ICommandInput, CommandReturnMessage> GetCommand<T, ICommandInput, CommandReturnMessage>(string commandLine);
+        ICommand<I, O> GetCommand<Input, Ouput>(string commandLine);
     }
 }

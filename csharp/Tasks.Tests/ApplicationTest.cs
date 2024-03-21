@@ -16,7 +16,7 @@ namespace Tasks
 		public void StartTheApplication()
 		{
 			this.console = new FakeConsole();
-			var taskList = new TaskList(console);
+			var taskList = new TaskListRun(console);
 			this.applicationThread = new System.Threading.Thread(() => taskList.Run());
 			applicationThread.Start();
 		}
@@ -36,7 +36,6 @@ namespace Tasks
 		[Test, Timeout(1000)]
 		public void ItWorks()
 		{
-			string dateTime = DateTime.Now.ToString("yyyy/MM/dd");
 			Execute("show");
 
 			Execute("add project secrets");

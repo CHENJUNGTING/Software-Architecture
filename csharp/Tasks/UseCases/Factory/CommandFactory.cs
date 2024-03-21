@@ -3,34 +3,38 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Text;
-using System.Windows.Input;
 using Tasks.UseCases.Command;
 using Tasks.UseCases.Input;
 using Tasks.UseCases.Message;
 
 namespace Tasks.UseCases.Factory
 {
-    class CommandFactory : ICommandFactory
+    class CommandFactory<I,O> : ICommandFactory<I, O> where I : ICommandInput where O : CommandReturnMessage
     {
-        public CommandBase<ICommandInput,CommandReturnMessage> GetCommand(string commandLine)
+        public ICommand<I,O> GetCommand<Input, Ouput>(string commandLine)
         {
             String[] commandRest = commandLine.Split(" ", 2);
             String command = commandRest[0];
             switch (command)
             {
                 case "show":
-                    CommandBase<ViewInput, CommandReturnMessage> commandView = new CommandView();
-                    return commandView;
+                    CommandBase<ShowInput, CommandReturnMessage> commandView = new CommandShow();
+                    return (ICommand<I, O>)commandView;
                 case "add":
-                    return new CommandAddProject();
+                    CommandBase<AddProjectInput, CommandReturnMessage> commandAddProject = new CommandAddProject();
+                    return (ICommand<I, O>)commandAddProject;
                 case "check":
-                    return new CommandCheck();
+                    CommandBase<CheckTaskInput, CommandReturnMessage> commandCheck = new CommandCheck();
+                    return (ICommand<I, O>)commandCheck;
                 case "uncheck":
-                    return new CommandUncheck();
+                    CommandBase<UncheckTaskInput, CommandReturnMessage> commandUncheck = new CommandUncheck();
+                    return (ICommand<I, O>)commandUncheck;
                 case "help":
-                    return new CommandHelp();
+                    CommandBase<HelpInput, CommandReturnMessage> commandHelp = new CommandHelp();
+                    return (ICommand<I, O>)commandHelp;
                 default:
-                    return new CommandError();
+                    CommandBase<ErrorInput, CommandReturnMessage > commandError = new CommandError();
+                    return (ICommand<I, O>)commandError;
             }
         }
     }
