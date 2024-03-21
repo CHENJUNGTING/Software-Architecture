@@ -1,24 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Tasks.Entity;
+using Tasks.UseCases.Input;
+using Tasks.UseCases.Message;
 
 namespace Tasks.UseCases.Command
 {
-    class CommandCheck : CommandBase
+    class CommandCheck : CommandBase<CheckTaskInput, CommandReturnMessage>
     {
-        private string commandRest = string.Empty;
-        public CommandCheck(string cmdL)
+        public override CommandReturnMessage Execute(CheckTaskInput commandInput)
         {
-            commandRest = cmdL;
-        }
-        public override void RealExecute()
-        {
-            Check();
-        }
-        private void Check()
-        {
-            int iD = Convert.ToInt32(commandRest);
-            SetDone(iD, true);
+            CommandReturnMessage commandReturnMessage = new CommandReturnMessage();
+            TaskList taskList = TaskList.getTaskList();
+            int iD = commandInput.GetID();
+            if(taskList.GetTaskById(iD) == null)
+            {
+                commandReturnMessage.AddMessage("Check Failed ID Not Find");
+                return commandReturnMessage;
+            }
+            taskList.SetDone(iD, true);
+            return commandReturnMessage;
         }
 
     }

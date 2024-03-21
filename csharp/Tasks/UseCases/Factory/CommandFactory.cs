@@ -3,30 +3,34 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Text;
+using System.Windows.Input;
 using Tasks.UseCases.Command;
+using Tasks.UseCases.Input;
+using Tasks.UseCases.Message;
 
 namespace Tasks.UseCases.Factory
 {
     class CommandFactory : ICommandFactory
     {
-        public CommandBase GetCommand(string commandLine)
+        public CommandBase<ICommandInput,CommandReturnMessage> GetCommand(string commandLine)
         {
             String[] commandRest = commandLine.Split(" ", 2);
             String command = commandRest[0];
             switch (command)
             {
                 case "show":
-                    return new CommandView("");
+                    CommandBase<ViewInput, CommandReturnMessage> commandView = new CommandView();
+                    return commandView;
                 case "add":
-                    return new CommandAdd(commandRest[1]);
+                    return new CommandAddProject();
                 case "check":
-                    return new CommandCheck(commandRest[1]);
+                    return new CommandCheck();
                 case "uncheck":
-                    return new CommandUncheck(commandRest[1]);
+                    return new CommandUncheck();
                 case "help":
                     return new CommandHelp();
                 default:
-                    return new CommandError(command);
+                    return new CommandError();
             }
         }
     }

@@ -2,19 +2,32 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
+using Tasks.Entity;
+using Tasks.UseCases.Input;
+using Tasks.UseCases.Message;
 
 namespace Tasks.UseCases.Command
 {
-    public class CommandView : CommandBase
+    public class CommandView : CommandBase<ViewInput, CommandReturnMessage>
     {
-        private string commandRest = string.Empty;
-        public override void RealExecute()
+        public override CommandReturnMessage Execute(ViewInput commandInput)
         {
-            ViewByProject();
-        }
-        public CommandView(string cmdL)
-        {
-            commandRest = cmdL;
+            CommandReturnMessage commandReturnMessage = new CommandReturnMessage();
+            TaskList taskList = TaskList.getTaskList();
+
+            foreach (var project in taskList.GetTasks())
+            {
+                commandReturnMessage.AddMessage(project.Key);
+                foreach (var task in project.Value)
+                {
+                    // console.WriteLine("    [{0}] {1}: {2}: {3}", (task.Done ? 'x' : ' '), task.Id, task.Description, task.DeadLine.ToString("yyyy/MM/dd"));
+                    commandReturnMessage.AddMessage($"    [{(task.Done ? 'x' : ' ')}] {task.Id}: {task.Description}");
+                }
+                commandReturnMessage.AddMessage();
+            }
+
+            return commandReturnMessage;
         }
         /*
         public List<Task> unPackTasks()
@@ -50,18 +63,6 @@ namespace Tasks.UseCases.Command
             ConsoleWriteTasks(sortedTasks);
         }
         */
-        private void ViewByProject()
-        {
-            foreach (var project in tasks)
-            {
-                commandReturnMessage.AddMessage(project.Key);
-                foreach (var task in project.Value)
-                {
-                    // console.WriteLine("    [{0}] {1}: {2}: {3}", (task.Done ? 'x' : ' '), task.Id, task.Description, task.DeadLine.ToString("yyyy/MM/dd"));
-                    commandReturnMessage.AddMessage($"    [{(task.Done ? 'x' : ' ')}] {task.Id}: {task.Description}");
-                }
-                commandReturnMessage.AddMessage();
-            }
-        }
+
     }
 }

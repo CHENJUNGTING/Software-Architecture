@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Tasks.UseCases.Input;
+using Tasks.UseCases.Message;
 
 namespace Tasks.UseCases.Command
 {
-    class CommandHelp : CommandBase
+    class CommandHelp : CommandBase<HelpInput, CommandReturnMessage>
     {
-        public override void RealExecute()
+        public override CommandReturnMessage Execute(HelpInput commandInput)
         {
-            Help();
-        }
-        private void Help()
-        {
+            CommandReturnMessage commandReturnMessage = new CommandReturnMessage();
             commandReturnMessage.AddMessage("Commands:");
             commandReturnMessage.AddMessage("  show");
             commandReturnMessage.AddMessage("  add project <project name>");
@@ -19,7 +18,7 @@ namespace Tasks.UseCases.Command
             commandReturnMessage.AddMessage("  check <task ID>");
             commandReturnMessage.AddMessage("  uncheck <task ID>");
             commandReturnMessage.AddMessage();
-
+            return commandReturnMessage;
         }
     }
 }
