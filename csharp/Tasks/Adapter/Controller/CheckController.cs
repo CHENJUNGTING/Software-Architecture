@@ -7,11 +7,11 @@ using Tasks.UseCases.Message;
 
 namespace Tasks.Adapter.Controller
 {
-    public class CheckController : CommandController
+    public class CheckController : ICommandController
     {
-        public CommandReturnMessage execute(string ExecuteCommand)
+        public CommandReturnMessage Execute(string executeCommand)
         {
-            string[] tokens = ExecuteCommand.Split(" ", 2);
+            string[] tokens = executeCommand.Split(" ", 2);
             CommandReturnMessage commandReturnMessage = new CommandReturnMessage();
             CommandCheck commandCheck = new CommandCheck();
             CommandCheckTaskInput checkTaskInput = new CommandCheckTaskInput();

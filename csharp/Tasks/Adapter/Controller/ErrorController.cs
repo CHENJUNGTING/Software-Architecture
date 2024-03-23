@@ -7,9 +7,9 @@ using Tasks.UseCases.Message;
 
 namespace Tasks.Adapter.Controller
 {
-    public class ErrorCommandController : CommandController
+    public class ErrorController : ICommandController
     {
-        public CommandReturnMessage execute(string ExecuteCommand)
+        public CommandReturnMessage Execute(string executeCommand)
         {
             CommandReturnMessage commandReturnMessage = new CommandReturnMessage();
             CommandError commandError = new CommandError();

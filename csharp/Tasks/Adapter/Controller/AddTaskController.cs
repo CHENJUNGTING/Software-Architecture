@@ -8,11 +8,11 @@ using Tasks.UseCases.Message;
 
 namespace Tasks.Adapter.Controller
 {
-    public class AddTaskController : CommandController
+    public class AddTaskController : ICommandController
     {
-        public CommandReturnMessage execute(string ExecuteCommand)
+        public CommandReturnMessage Execute(string executeCommand)
         {
-            string[] tokens = ExecuteCommand.Split(" ", 4);
+            string[] tokens = executeCommand.Split(" ", 4);
             CommandReturnMessage commandReturnMessage = new CommandReturnMessage();
             CommandAddTask commandAddTask = new CommandAddTask();
             CommandAddTaskInput addTaskInput = new CommandAddTaskInput();

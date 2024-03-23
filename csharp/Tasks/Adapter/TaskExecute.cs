@@ -10,39 +10,39 @@ namespace Tasks.Adapter
 {
     internal class TaskExecute : ITaskExecute
     {
-        public CommandReturnMessage Execute(string commandLine)
+        public CommandReturnMessage ExecuteTask(string commandLine)
         {
             string[] tokens = commandLine.Split(" ", 2);
             string feature = tokens[0];
             switch (feature)
             {
                 case "add":
-                    return FindAddController(commandLine).execute(commandLine);
+                    return FindAddController(commandLine).Execute(commandLine);
                 case "check":
                     CheckController checkController = new CheckController();
-                    return checkController.execute(commandLine);
+                    return checkController.Execute(commandLine);
                 case "uncheck":
                     UncheckController uncheckController = new UncheckController();
-                    return uncheckController.execute(commandLine);
+                    return uncheckController.Execute(commandLine);
                 case "show":
                     ShowController showController = new ShowController();
-                    return showController.execute(commandLine);
+                    return showController.Execute(commandLine);
                 case "help":
                     HelpController helpController = new HelpController();
-                    return helpController.execute(commandLine);
+                    return helpController.Execute(commandLine);
                 default:
-                    ErrorCommandController errorController = new ErrorCommandController();
-                    return errorController.execute(commandLine); 
+                    ErrorController errorController = new ErrorController();
+                    return errorController.Execute(commandLine); 
             }
         }
 
-        private static CommandController FindAddController(string consoleCommand)
+        private static ICommandController FindAddController(string consoleCommand)
         {
             string[] tokens = consoleCommand.Split(" ", 3);
 
             if (tokens.Length < 2)
             {
-                ErrorCommandController errorController = new ErrorCommandController();
+                ErrorController errorController = new ErrorController();
                 return errorController;
             }
 
@@ -56,7 +56,7 @@ namespace Tasks.Adapter
             }
             else
             {
-                ErrorCommandController errorController = new ErrorCommandController();
+                ErrorController errorController = new ErrorController();
                 return errorController;
             }
         }

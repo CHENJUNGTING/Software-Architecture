@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Tasks.UseCases.Message
 {
-    public class CommandReturnMessage
+    public class CommandReturnMessage : ICommandReturnMessage
     {
         private List<string> message = new List<string>();
         public void AddMessage(string message)

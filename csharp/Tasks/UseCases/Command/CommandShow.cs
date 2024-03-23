@@ -16,7 +16,7 @@ namespace Tasks.UseCases.Command
             CommandReturnMessage commandReturnMessage = new CommandReturnMessage();
             TaskList taskList = TaskList.getTaskList();
 
-            foreach (var project in taskList.GetTasks())
+            foreach (var project in taskList.GetProjects())
             {
                 commandReturnMessage.AddMessage(project.getName().ToString());
                 foreach (var task in project.getTasks())

@@ -8,6 +8,6 @@ namespace Tasks.Adapter
 {
     interface ITaskExecute
     {
-        public CommandReturnMessage Execute(string command);
+        public CommandReturnMessage ExecuteTask(string command);
     }
 }

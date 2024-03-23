@@ -8,7 +8,8 @@ namespace Tasks.Entity
     {
         private string projectName;
 
-        public ProjectName(string projectName) {
+        public ProjectName(string projectName)
+        {
             this.projectName = projectName;
         }
 

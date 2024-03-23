@@ -1,6 +1,8 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
@@ -10,27 +12,14 @@ using Tasks.UseCases.Message;
 
 namespace Tasks.Entity
 {
-
-    public struct Test
-    {
-
-    }
     public class TaskList
     {
         private static TaskList taskList = null;
         private int ID = 1;
+        private List<Project> _projects = new List<Project>();
 
-        //private IDictionary<string, IList<Task>> tasks = new Dictionary<string, IList<Task>>();
-        private List<Project> projects = new List<Project>();
+        private TaskList() { }
 
-        public List<Project> GetTasks()
-        {
-            return projects;
-        }
-         public int GetID()
-        {
-            return ID;
-        }
         public static TaskList getTaskList()
         {
             if (taskList == null)
@@ -40,31 +29,25 @@ namespace Tasks.Entity
             return taskList;
         }
 
-        public void addTask(ProjectName projectName,string description)
+        public ReadOnlyCollection<Project> GetProjects()
         {
-            foreach (Project project in projects)
-            {
-                if (project.getName().Equals(projectName))
-                {
-                    project.getTasks().Add(new Task { Id = ID, Description = description, Done = false });
-                }
-            }
+            return _projects.AsReadOnly();
         }
 
-        public Task GetTaskById(int id)
+        public int GetID()
         {
-
-            var identifiedTask = projects
-                .Select(project => project.getTasks().FirstOrDefault(task => task.Id == id))
-                .Where(task => task != null)
-                .FirstOrDefault();
-
-            return identifiedTask;
+            return ID;
         }
 
-        public IList<Task> GetTasksByProjectName(ProjectName projectName)
+        public ReadOnlyCollection<Task> GetTasksByProjectName(ProjectName projectName)
         {
-            foreach (Project project in projects)
+            var tasks = GetTasksByProjectNameInternal(projectName);
+            return tasks != null ? new ReadOnlyCollection<Task>(tasks) : new ReadOnlyCollection<Task>(new List<Task>());
+        }
+
+        private IList<Task> GetTasksByProjectNameInternal(ProjectName projectName)
+        {
+            foreach (Project project in _projects)
             {
                 if (project.getName() == projectName)
                 {
@@ -74,16 +57,26 @@ namespace Tasks.Entity
             return null;
         }
 
+        public Task GetTaskById(int id)
+        {
+
+            var identifiedTask = _projects
+                .Select(project => project.getTasks().FirstOrDefault(task => task.Id == id))
+                .Where(task => task != null)
+                .FirstOrDefault();
+
+            return identifiedTask;
+        }
 
         public void AddProject(ProjectName name)
         {
             Project project = new Project(name, new List<Task>());
-            this.projects.Add(project);
+            _projects.Add(project);
 
         }
         public void AddTask(ProjectName projectName, string description)
         {
-            IList<Task> project = GetTasksByProjectName(projectName);
+            IList<Task> project = GetTasksByProjectNameInternal(projectName);
             int TaskID = NextID();
             project.Add(new Task { Id = TaskID, Description = description, Done = false });
         }

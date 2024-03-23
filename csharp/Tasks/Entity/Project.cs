@@ -13,8 +13,8 @@ namespace Tasks.Entity
 
         public Project(ProjectName name, List<Task> tasks)
         {
-            this._name = name;
-            this._tasks = tasks;
+            _name = name;
+            _tasks = tasks;
         }
 
         public ProjectName getName()

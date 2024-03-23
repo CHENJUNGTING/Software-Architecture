@@ -25,7 +25,7 @@ namespace Tasks.IO
         public void Run()
         {
             ITaskExecute taskExecute = new TaskExecute();
-            CommandReturnMessage commandReturnMessage = new CommandReturnMessage();
+            ICommandReturnMessage commandReturnMessage = new CommandReturnMessage();
             while (true)
             {
                 console.Write("> ");
@@ -34,7 +34,7 @@ namespace Tasks.IO
                 {
                     break;
                 }
-                commandReturnMessage = taskExecute.Execute(command);
+                commandReturnMessage = taskExecute.ExecuteTask(command);
                 ShowOutputMessage(commandReturnMessage.GetMessage());
             }
         }

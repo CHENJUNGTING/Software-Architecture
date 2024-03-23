@@ -5,8 +5,8 @@ using Tasks.UseCases.Message;
 
 namespace Tasks.Adapter.Controller
 {
-    public interface CommandController
+    public interface ICommandController
     {
-        public CommandReturnMessage execute(string consoleCommand);
+        public CommandReturnMessage Execute(string executeCommand);
     }
 }
