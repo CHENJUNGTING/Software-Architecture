@@ -34,5 +34,9 @@ namespace Tasks.UseCases.Command
 
             return commandReturnMessage;
         }
+        public override string GetHelpString()
+        {
+            return "  add task <project name> <task description>";
+        }
     }
 }

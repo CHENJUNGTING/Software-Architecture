@@ -12,8 +12,8 @@ namespace Tasks.Adapter.Controller
         public CommandReturnMessage Execute(string executeCommand)
         {
             CommandReturnMessage commandReturnMessage = new CommandReturnMessage();
-            CommandShow commandHelp = new CommandShow();
-            CommandShowInput showInput = new CommandShowInput();
+            CommandHelp commandHelp = new CommandHelp();
+            CommandHelpInput showInput = new CommandHelpInput();
             commandReturnMessage = commandHelp.Execute(showInput);
             return commandReturnMessage;
 

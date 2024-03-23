@@ -24,5 +24,10 @@ namespace Tasks.UseCases.Command
             }
             return commandReturnMessage;
         }
+
+        public override string GetHelpString()
+        {
+            return "  add project <project name>";
+        }
     }
 }

@@ -15,6 +15,9 @@ namespace Tasks.UseCases.Command
             commandReturnMessage.AddMessage($"I don't know what the command \"{command}\" is.");
             return commandReturnMessage;
         }
-
+        public override string GetHelpString()
+        {
+            return string.Empty;
+        }
     }
 }

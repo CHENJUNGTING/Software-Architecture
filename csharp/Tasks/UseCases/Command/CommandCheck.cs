@@ -22,6 +22,9 @@ namespace Tasks.UseCases.Command
             taskList.SetDone(iD, true);
             return commandReturnMessage;
         }
-
+        public override string GetHelpString()
+        {
+            return "  check <task ID>";
+        }
     }
 }

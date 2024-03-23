@@ -29,6 +29,10 @@ namespace Tasks.UseCases.Command
 
             return commandReturnMessage;
         }
+        public override string GetHelpString()
+        {
+            return "  show";
+        }
         /*
         public List<Task> unPackTasks()
         {

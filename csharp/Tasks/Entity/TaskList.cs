@@ -58,8 +58,6 @@ namespace Tasks.Entity
             return ID;
         }
 
-
-
         public Task GetTaskById(int id)
         {
 
@@ -77,18 +75,19 @@ namespace Tasks.Entity
             _projects.Add(project);
 
         }
+
         public void AddTask(ProjectName projectName, string description)
         {
             IList<Task> project = GetTasksByProjectNameInternal(projectName);
             int TaskID = NextID();
             project.Add(new Task { Id = TaskID, Description = description, Done = false });
         }
+
         public void SetDone(int id, bool done)
         {
             Task task = GetTaskById(id);
             task.Done = done;
         }
-
 
         public int NextID()
         {

@@ -23,7 +23,10 @@ namespace Tasks.UseCases.Command
             taskList.SetDone(iD, false);
             return commandReturnMessage;
         }
-
+        public override string GetHelpString()
+        {
+            return "  uncheck <task ID>";
+        }
 
     }
 }
