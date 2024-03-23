@@ -8,6 +8,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Tasks.Entity;
 using Tasks.UseCases.Message;
 
 namespace Tasks.Entity
@@ -19,6 +20,24 @@ namespace Tasks.Entity
         private List<Project> _projects = new List<Project>();
 
         private TaskList() { }
+
+        private List<Task> GetTasksByProjectNameInternal(ProjectName projectName)
+        {
+            foreach (Project project in _projects)
+            {
+                if (project.getName() == projectName)
+                {
+                    return project.getTasks();
+                }
+            }
+            return null;
+        }
+
+        public ReadOnlyCollection<Task> GetTasksByProjectName(ProjectName projectName)
+        {
+            var tasks = GetTasksByProjectNameInternal(projectName).AsReadOnly();
+            return tasks;
+        }
 
         public static TaskList getTaskList()
         {
@@ -39,23 +58,7 @@ namespace Tasks.Entity
             return ID;
         }
 
-        public ReadOnlyCollection<Task> GetTasksByProjectName(ProjectName projectName)
-        {
-            var tasks = GetTasksByProjectNameInternal(projectName);
-            return tasks != null ? new ReadOnlyCollection<Task>(tasks) : new ReadOnlyCollection<Task>(new List<Task>());
-        }
 
-        private IList<Task> GetTasksByProjectNameInternal(ProjectName projectName)
-        {
-            foreach (Project project in _projects)
-            {
-                if (project.getName() == projectName)
-                {
-                    return project.getTasks();
-                }
-            }
-            return null;
-        }
 
         public Task GetTaskById(int id)
         {
