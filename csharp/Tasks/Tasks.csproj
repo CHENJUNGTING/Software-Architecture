@@ -3,6 +3,6 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <ApplicationIcon />
     <OutputType>Exe</OutputType>
-    <StartupObject>Tasks.TaskListRun</StartupObject>
+    <StartupObject>Tasks.IO.TaskListRun</StartupObject>
   </PropertyGroup>
 </Project>

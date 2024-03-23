@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Tasks.Entity;
 
 namespace Tasks.UseCases.Input
 {
-    public class AddTaskInput : BaseInput
+    public class CommandAddTaskInput : ICommandInput
     {
-        private string projectName;
+        private ProjectName projectName;
         private string description;
-        public string GetProjectName()
+        public ProjectName GetProjectName()
         {
             return projectName;
         }
@@ -17,7 +18,7 @@ namespace Tasks.UseCases.Input
         {
             return description;
         }
-        public void SetProjectName(string projectName)
+        public void SetProjectName(ProjectName projectName)
         {
             this.projectName = projectName;
         }

@@ -1,21 +1,31 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Linq;
 using Tasks.UseCases.Message;
 
 namespace Tasks.Entity
 {
+
+    public struct Test
+    {
+
+    }
     public class TaskList
     {
         private static TaskList taskList = null;
         private int ID = 1;
 
-        private IDictionary<string, IList<Task>> tasks = new Dictionary<string, IList<Task>>();
-        public IDictionary<string, IList<Task>> GetTasks()
+        //private IDictionary<string, IList<Task>> tasks = new Dictionary<string, IList<Task>>();
+        private List<Project> projects = new List<Project>();
+
+        public List<Project> GetTasks()
         {
-            return tasks;
+            return projects;
         }
          public int GetID()
         {
@@ -30,35 +40,48 @@ namespace Tasks.Entity
             return taskList;
         }
 
-        public void addTask(string project,string description)
+        public void addTask(ProjectName projectName,string description)
         {
-            if (tasks.TryGetValue(project, out IList<Task> projectTasks))
+            foreach (Project project in projects)
             {
-                projectTasks.Add(new Task { Id = ID, Description = description, Done = false });
+                if (project.getName().Equals(projectName))
+                {
+                    project.getTasks().Add(new Task { Id = ID, Description = description, Done = false });
+                }
             }
         }
 
         public Task GetTaskById(int id)
         {
-            var identifiedTask = tasks
-                .Select(project => project.Value.FirstOrDefault(task => task.Id == id))
+
+            var identifiedTask = projects
+                .Select(project => project.getTasks().FirstOrDefault(task => task.Id == id))
                 .Where(task => task != null)
                 .FirstOrDefault();
 
             return identifiedTask;
         }
 
-        public IList<Task> GetTasksByProjectName(String projectName)
+        public IList<Task> GetTasksByProjectName(ProjectName projectName)
         {
-            return tasks[projectName];
+            foreach (Project project in projects)
+            {
+                if (project.getName() == projectName)
+                {
+                    return project.getTasks();
+                }
+            }
+            return null;
         }
 
 
-        public void AddProject(string projectName)
+        public void AddProject(ProjectName name)
         {
-            tasks[projectName] = new List<Task>();
+            Project project = new Project(name, new List<Task>());
+            this.projects.Add(project);
+
         }
-        public void AddTask(string projectName, string description)
+        public void AddTask(ProjectName projectName, string description)
         {
             IList<Task> project = GetTasksByProjectName(projectName);
             int TaskID = NextID();

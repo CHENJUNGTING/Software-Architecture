@@ -7,17 +7,18 @@ using Tasks.UseCases.Message;
 
 namespace Tasks.UseCases.Command
 {
-    public class CommandAddTask : CommandBase<AddTaskInput, CommandReturnMessage>
+    public class CommandAddTask : CommandBase<CommandAddTaskInput, CommandReturnMessage>
     {
-        public override CommandReturnMessage Execute(AddTaskInput commandInput)
+        public override CommandReturnMessage Execute(CommandAddTaskInput commandInput)
         {
             CommandReturnMessage commandReturnMessage = new CommandReturnMessage();
-            Entity.TaskList taskList = Entity.TaskList.getTaskList();
-            string projectName = commandInput.GetProjectName();
+            TaskList taskList = TaskList.getTaskList();
+            ProjectName projectName = commandInput.GetProjectName();
             string description = commandInput.GetDescription();
-            IDictionary<string, IList<Task>> tasks = taskList.GetTasks();
+            IList<Project> projects = taskList.GetTasks();
             int ID = taskList.GetID();
-            if (!tasks.TryGetValue(projectName, out IList<Task> projectTasks))
+
+            if (taskList.GetTasksByProjectName(projectName) == null)
             {
                 commandReturnMessage.AddMessage($"Could not find a project with the name \"{projectName}\".");
                 return commandReturnMessage;

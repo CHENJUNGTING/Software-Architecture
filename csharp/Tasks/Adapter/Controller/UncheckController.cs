@@ -14,7 +14,7 @@ namespace Tasks.Adapter.Controller
             string[] tokens = ExecuteCommand.Split(" ", 2);
             CommandReturnMessage commandReturnMessage = new CommandReturnMessage();
             CommandUncheck commandUncheck = new CommandUncheck();
-            UncheckTaskInput uncheckTaskInput = new UncheckTaskInput();
+            CommandUncheckTaskInput uncheckTaskInput = new CommandUncheckTaskInput();
             uncheckTaskInput.SetID(Convert.ToInt32(tokens[1]));
             commandReturnMessage = commandUncheck.Execute(uncheckTaskInput);
             return commandReturnMessage;

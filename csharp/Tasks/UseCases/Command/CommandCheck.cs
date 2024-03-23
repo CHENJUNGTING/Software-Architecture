@@ -7,12 +7,12 @@ using Tasks.UseCases.Message;
 
 namespace Tasks.UseCases.Command
 {
-    class CommandCheck : CommandBase<CheckTaskInput, CommandReturnMessage>
+    class CommandCheck : CommandBase<CommandCheckTaskInput, CommandReturnMessage>
     {
-        public override CommandReturnMessage Execute(CheckTaskInput commandInput)
+        public override CommandReturnMessage Execute(CommandCheckTaskInput commandInput)
         {
             CommandReturnMessage commandReturnMessage = new CommandReturnMessage();
-            Entity.TaskList taskList = Entity.TaskList.getTaskList();
+            TaskList taskList = TaskList.getTaskList();
             int iD = commandInput.GetID();
             if(taskList.GetTaskById(iD) == null)
             {

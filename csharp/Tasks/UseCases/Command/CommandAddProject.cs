@@ -7,15 +7,15 @@ using Tasks.UseCases.Message;
 
 namespace Tasks.UseCases.Command
 {
-    class CommandAddProject : CommandBase<AddProjectInput, CommandReturnMessage>
+    class CommandAddProject : CommandBase<CommandAddProjectInput, CommandReturnMessage>
 
     {
 
-        public override CommandReturnMessage Execute(AddProjectInput commandInput)
+        public override CommandReturnMessage Execute(CommandAddProjectInput commandInput)
         {
-            string projectName = commandInput.GetProjectName();
+            ProjectName projectName = commandInput.GetProjectName();
             CommandReturnMessage commandReturnMessage = new CommandReturnMessage();
-            Entity.TaskList taskList = Entity.TaskList.getTaskList();
+            TaskList taskList = TaskList.getTaskList();
             taskList.AddProject(projectName);
 
             if(taskList.GetTasksByProjectName(projectName) == null)

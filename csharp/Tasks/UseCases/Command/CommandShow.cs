@@ -9,17 +9,17 @@ using Tasks.UseCases.Message;
 
 namespace Tasks.UseCases.Command
 {
-    public class CommandShow : CommandBase<ShowInput, CommandReturnMessage>
+    public class CommandShow : CommandBase<CommandShowInput, CommandReturnMessage>
     {
-        public override CommandReturnMessage Execute(ShowInput commandInput)
+        public override CommandReturnMessage Execute(CommandShowInput commandInput)
         {
             CommandReturnMessage commandReturnMessage = new CommandReturnMessage();
-            Entity.TaskList taskList = Entity.TaskList.getTaskList();
+            TaskList taskList = TaskList.getTaskList();
 
             foreach (var project in taskList.GetTasks())
             {
-                commandReturnMessage.AddMessage(project.Key);
-                foreach (var task in project.Value)
+                commandReturnMessage.AddMessage(project.getName().ToString());
+                foreach (var task in project.getTasks())
                 {
                     // console.WriteLine("    [{0}] {1}: {2}: {3}", (task.Done ? 'x' : ' '), task.Id, task.Description, task.DeadLine.ToString("yyyy/MM/dd"));
                     commandReturnMessage.AddMessage($"    [{(task.Done ? 'x' : ' ')}] {task.Id}: {task.Description}");

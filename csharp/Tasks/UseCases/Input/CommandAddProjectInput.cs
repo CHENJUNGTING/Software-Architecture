@@ -2,18 +2,19 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
+using Tasks.Entity;
 
 namespace Tasks.UseCases.Input
 {
-    public class AddProjectInput : BaseInput
+    public class CommandAddProjectInput : ICommandInput
     {
-        private string projectName;
+        private ProjectName projectName;
 
-        public string GetProjectName()
+        public ProjectName GetProjectName()
         {
             return projectName;
         }
-        public void SetProjectName(string projectName)
+        public void SetProjectName(ProjectName projectName)
         {
             this.projectName = projectName;
         }

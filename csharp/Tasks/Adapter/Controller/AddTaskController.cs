@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Tasks.Entity;
 using Tasks.UseCases.Command;
 using Tasks.UseCases.Input;
 using Tasks.UseCases.Message;
@@ -14,8 +15,9 @@ namespace Tasks.Adapter.Controller
             string[] tokens = ExecuteCommand.Split(" ", 4);
             CommandReturnMessage commandReturnMessage = new CommandReturnMessage();
             CommandAddTask commandAddTask = new CommandAddTask();
-            AddTaskInput addTaskInput = new AddTaskInput();
-            addTaskInput.SetProjectName(tokens[2]);
+            CommandAddTaskInput addTaskInput = new CommandAddTaskInput();
+            ProjectName projectName = new ProjectName(tokens[2]);
+            addTaskInput.SetProjectName(projectName);
             addTaskInput.SetDescription(tokens[3]);
             commandReturnMessage = commandAddTask.Execute(addTaskInput);
             return commandReturnMessage;

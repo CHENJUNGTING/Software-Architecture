@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Tasks.UseCases.Input
 {
-    public class ErrorInput : BaseInput
+    public class CommandErrorInput : ICommandInput
     {
         private string command;
         public void SetCommand(string command) { this.command = command; }

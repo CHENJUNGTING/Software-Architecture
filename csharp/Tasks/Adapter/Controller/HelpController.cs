@@ -13,7 +13,7 @@ namespace Tasks.Adapter.Controller
         {
             CommandReturnMessage commandReturnMessage = new CommandReturnMessage();
             CommandShow commandHelp = new CommandShow();
-            ShowInput showInput = new ShowInput();
+            CommandShowInput showInput = new CommandShowInput();
             commandReturnMessage = commandHelp.Execute(showInput);
             return commandReturnMessage;
 

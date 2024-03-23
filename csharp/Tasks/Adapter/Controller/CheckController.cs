@@ -14,7 +14,7 @@ namespace Tasks.Adapter.Controller
             string[] tokens = ExecuteCommand.Split(" ", 2);
             CommandReturnMessage commandReturnMessage = new CommandReturnMessage();
             CommandCheck commandCheck = new CommandCheck();
-            CheckTaskInput checkTaskInput = new CheckTaskInput();
+            CommandCheckTaskInput checkTaskInput = new CommandCheckTaskInput();
             checkTaskInput.SetID(Convert.ToInt32(tokens[1]));
             commandReturnMessage = commandCheck.Execute(checkTaskInput);
             return commandReturnMessage;

@@ -6,9 +6,9 @@ using Tasks.UseCases.Message;
 
 namespace Tasks.UseCases.Command
 {
-    class CommandError : CommandBase<ErrorInput, CommandReturnMessage>
+    class CommandError : CommandBase<CommandErrorInput, CommandReturnMessage>
     {
-        public override CommandReturnMessage Execute(ErrorInput commandInput)
+        public override CommandReturnMessage Execute(CommandErrorInput commandInput)
         {
             CommandReturnMessage commandReturnMessage = new CommandReturnMessage();
             string command = commandInput.GetCommand();

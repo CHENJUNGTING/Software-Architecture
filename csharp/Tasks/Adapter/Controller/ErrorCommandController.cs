@@ -13,7 +13,7 @@ namespace Tasks.Adapter.Controller
         {
             CommandReturnMessage commandReturnMessage = new CommandReturnMessage();
             CommandError commandError = new CommandError();
-            ErrorInput errorInput = new ErrorInput();
+            CommandErrorInput errorInput = new CommandErrorInput();
             commandReturnMessage = commandError.Execute(errorInput);
             return commandReturnMessage;
         }

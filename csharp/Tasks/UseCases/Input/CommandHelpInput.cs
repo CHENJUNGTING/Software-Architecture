@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Tasks.UseCases.Input
 {
-    public class HelpInput : ICommandInput
+    public class CommandHelpInput : ICommandInput
     {
     }
 }

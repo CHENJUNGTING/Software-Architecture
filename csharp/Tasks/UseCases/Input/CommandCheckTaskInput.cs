@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Tasks.UseCases.Input
 {
-    public class CheckTaskInput : BaseInput
+    public class CommandCheckTaskInput : ICommandInput
     {
         private int ID;
         public int GetID()

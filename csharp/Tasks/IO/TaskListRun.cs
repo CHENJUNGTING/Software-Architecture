@@ -3,16 +3,15 @@ using System.Collections.Generic;
 using Tasks.UseCases.Command;
 using Tasks.Adapter;
 using Tasks.UseCases.Message;
-using Tasks.IO;
 
-namespace Tasks
+namespace Tasks.IO
 {
     public sealed class TaskListRun
     {
         private const string QUIT = "quit";
 
         public static IConsole console { get; private set; }
-        
+
         public static void Main(string[] args)
         {
             new TaskListRun(new RealConsole()).Run();

@@ -6,9 +6,9 @@ using Tasks.UseCases.Message;
 
 namespace Tasks.UseCases.Command
 {
-    class CommandHelp : CommandBase<HelpInput, CommandReturnMessage>
+    class CommandHelp : CommandBase<CommandHelpInput, CommandReturnMessage>
     {
-        public override CommandReturnMessage Execute(HelpInput commandInput)
+        public override CommandReturnMessage Execute(CommandHelpInput commandInput)
         {
             CommandReturnMessage commandReturnMessage = new CommandReturnMessage();
             commandReturnMessage.AddMessage("Commands:");
