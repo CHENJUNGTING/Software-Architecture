@@ -20,6 +20,15 @@ namespace Tasks.Entity
 
         private TaskList() { }
 
+        public static TaskList GetTaskList()
+        {
+            if (taskList == null)
+            {
+                taskList = new TaskList();
+            }
+            return taskList;
+        }
+
         public ReadOnlyCollection<Task> GetTasksByProjectName(ProjectName projectName)
         {
             foreach (Project project in _projects)
@@ -32,19 +41,11 @@ namespace Tasks.Entity
             return null;
         }
 
-        public static TaskList GetTaskList()
-        {
-            if (taskList == null)
-            {
-                taskList = new TaskList();
-            }
-            return taskList;
-        }
-
         public ReadOnlyCollection<Project> GetProjects()
         {
             return _projects.AsReadOnly();
         }
+
         private Project GetProjectByProjectName(ProjectName projectName)
         {
             foreach (Project project in _projects)
@@ -56,6 +57,7 @@ namespace Tasks.Entity
             }
             return null;
         }
+
         public Task GetTaskById(int id)
         {
 

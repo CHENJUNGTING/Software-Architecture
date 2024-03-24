@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Tasks.Entity
 {
-    class TaskID
+    public class TaskIdCounter
     {
         private static int id = 1;
 
