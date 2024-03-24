@@ -7,7 +7,7 @@ using Tasks.UseCases.Message;
 
 namespace Tasks.UseCases.Command
 {
-        public interface ICommand<I, O>
+        public interface ICommand<I, O> where I : ICommandInput where O : ICommandReturnMessage
         {
            O Execute(I commandInput);
         }

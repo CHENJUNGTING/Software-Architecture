@@ -15,7 +15,7 @@ namespace Tasks.UseCases.Command
         {
             ProjectName projectName = commandInput.GetProjectName();
             CommandReturnMessage commandReturnMessage = new CommandReturnMessage();
-            TaskList taskList = TaskList.getTaskList();
+            TaskList taskList = TaskList.GetTaskList();
             taskList.AddProject(projectName);
 
             if(taskList.GetTasksByProjectName(projectName) == null)

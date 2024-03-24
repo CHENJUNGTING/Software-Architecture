@@ -14,12 +14,12 @@ namespace Tasks.UseCases.Command
         public override CommandReturnMessage Execute(CommandShowInput commandInput)
         {
             CommandReturnMessage commandReturnMessage = new CommandReturnMessage();
-            TaskList taskList = TaskList.getTaskList();
+            TaskList taskList = TaskList.GetTaskList();
 
             foreach (var project in taskList.GetProjects())
             {
-                commandReturnMessage.AddMessage(project.getName().ToString());
-                foreach (var task in project.getTasks())
+                commandReturnMessage.AddMessage(project.GetName().ToString());
+                foreach (var task in project.GetTasks())
                 {
                     // console.WriteLine("    [{0}] {1}: {2}: {3}", (task.Done ? 'x' : ' '), task.Id, task.Description, task.DeadLine.ToString("yyyy/MM/dd"));
                     commandReturnMessage.AddMessage($"    [{(task.Done ? 'x' : ' ')}] {task.Id}: {task.Description}");

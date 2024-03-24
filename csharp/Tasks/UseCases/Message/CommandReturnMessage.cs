@@ -6,7 +6,7 @@ namespace Tasks.UseCases.Message
 {
     public class CommandReturnMessage : ICommandReturnMessage
     {
-        private List<string> message = new List<string>();
+        private readonly List<string> message = new List<string>();
         public void AddMessage(string message)
         {
             this.message.Add(message);

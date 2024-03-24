@@ -17,7 +17,7 @@ namespace Tasks.Entity
     {
         private static TaskList taskList = null;
         private int ID = 1;
-        private List<Project> _projects = new List<Project>();
+        private readonly List<Project> _projects = new List<Project>();
 
         private TaskList() { }
 
@@ -25,9 +25,9 @@ namespace Tasks.Entity
         {
             foreach (Project project in _projects)
             {
-                if (project.getName() == projectName)
+                if (project.GetName() == projectName)
                 {
-                    return project.getTasks();
+                    return project.GetTasks();
                 }
             }
             return null;
@@ -39,7 +39,7 @@ namespace Tasks.Entity
             return tasks;
         }
 
-        public static TaskList getTaskList()
+        public static TaskList GetTaskList()
         {
             if (taskList == null)
             {
@@ -62,7 +62,7 @@ namespace Tasks.Entity
         {
 
             var identifiedTask = _projects
-                .Select(project => project.getTasks().FirstOrDefault(task => task.Id == id))
+                .Select(project => project.GetTasks().FirstOrDefault(task => task.Id == id))
                 .Where(task => task != null)
                 .FirstOrDefault();
 

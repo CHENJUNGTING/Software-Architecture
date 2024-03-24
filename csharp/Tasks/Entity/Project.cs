@@ -8,7 +8,7 @@ namespace Tasks.Entity
 {
     public class Project
     {
-        private ProjectName _name;
+        private readonly ProjectName _name;
         private readonly List<Task> _tasks;
 
         public Project(ProjectName name, List<Task> tasks)
@@ -17,12 +17,12 @@ namespace Tasks.Entity
             _tasks = tasks;
         }
 
-        public ProjectName getName()
+        public ProjectName GetName()
         {
             return _name;
         }
 
-        public List<Task> getTasks()
+        public List<Task> GetTasks()
         {
             return _tasks;
         }

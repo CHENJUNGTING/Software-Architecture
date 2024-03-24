@@ -10,7 +10,7 @@ using Tasks.UseCases.Message;
 
 namespace Tasks.UseCases.Command
 {
-    public abstract class CommandBase<I, O> : ICommand<I, O>
+    public abstract class CommandBase<I, O> : ICommand<I, O> where I : ICommandInput where O : ICommandReturnMessage
     {
         public abstract O Execute(I commandInput);
         public abstract string GetHelpString();

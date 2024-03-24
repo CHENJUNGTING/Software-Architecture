@@ -6,7 +6,7 @@ namespace Tasks.Entity
 {
     public class ProjectName
     {
-        private string projectName;
+        private readonly string projectName;
 
         public ProjectName(string projectName)
         {

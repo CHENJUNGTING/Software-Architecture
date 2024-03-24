@@ -13,7 +13,7 @@ namespace Tasks.UseCases.Command
         public override CommandReturnMessage Execute(CommandUncheckTaskInput commandInput)
         {
             CommandReturnMessage commandReturnMessage = new CommandReturnMessage();
-            TaskList taskList = TaskList.getTaskList();
+            TaskList taskList = TaskList.GetTaskList();
             int iD = commandInput.GetID();
             if (taskList.GetTaskById(iD) == null)
             {
