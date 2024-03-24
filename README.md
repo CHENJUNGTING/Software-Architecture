@@ -12,7 +12,7 @@
 - Entity     :  
   - 存放底層模型  
 - Use Cases  :  
-  - 內部存放三個資料夾 (Command、Factory、Message)  
+  - 內部存放三個資料夾 (Command、Message、Input)  
     - Command -> 存放了各種指令類別  
     - Message -> 定義回傳給Controller的格式 (DTO)
     - Input -> 定義Command輸入的格式(DTO)
