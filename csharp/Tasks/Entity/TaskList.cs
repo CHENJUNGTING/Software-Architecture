@@ -16,12 +16,11 @@ namespace Tasks.Entity
     public class TaskList
     {
         private static TaskList taskList = null;
-        private int ID = 1;
         private readonly List<Project> _projects = new List<Project>();
 
         private TaskList() { }
 
-        private List<Task> GetTasksByProjectNameInternal(ProjectName projectName)
+        public ReadOnlyCollection<Task> GetTasksByProjectName(ProjectName projectName)
         {
             foreach (Project project in _projects)
             {
@@ -31,12 +30,6 @@ namespace Tasks.Entity
                 }
             }
             return null;
-        }
-
-        public ReadOnlyCollection<Task> GetTasksByProjectName(ProjectName projectName)
-        {
-            var tasks = GetTasksByProjectNameInternal(projectName).AsReadOnly();
-            return tasks;
         }
 
         public static TaskList GetTaskList()
@@ -52,12 +45,17 @@ namespace Tasks.Entity
         {
             return _projects.AsReadOnly();
         }
-
-        public int GetID()
+        private Project GetProjectByProjectName(ProjectName projectName)
         {
-            return ID;
+            foreach (Project project in _projects)
+            {
+                if (project.GetName() == projectName)
+                {
+                    return project;
+                }
+            }
+            return null;
         }
-
         public Task GetTaskById(int id)
         {
 
@@ -76,22 +74,15 @@ namespace Tasks.Entity
 
         }
 
-        public void AddTask(ProjectName projectName, string description)
+        public void AddTask(ProjectName projectName,string description)
         {
-            IList<Task> project = GetTasksByProjectNameInternal(projectName);
-            int TaskID = NextID();
-            project.Add(new Task { Id = TaskID, Description = description, Done = false });
+            GetProjectByProjectName(projectName).AddTask(description);
         }
 
         public void SetDone(int id, bool done)
         {
             Task task = GetTaskById(id);
-            task.Done = done;
-        }
-
-        public int NextID()
-        {
-            return ID++;
+            task.SetDone(done);
         }
 
     }

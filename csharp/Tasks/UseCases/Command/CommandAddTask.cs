@@ -15,7 +15,7 @@ namespace Tasks.UseCases.Command
             TaskList taskList = TaskList.GetTaskList();
             ProjectName projectName = commandInput.GetProjectName();
             string description = commandInput.GetDescription();
-            int ID = taskList.GetID();
+            int ID = TaskID.GetID();
 
             if (taskList.GetTasksByProjectName(projectName) == null)
             {

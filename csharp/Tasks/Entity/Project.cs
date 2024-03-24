@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -22,11 +23,17 @@ namespace Tasks.Entity
             return _name;
         }
 
-        public List<Task> GetTasks()
+        public  ReadOnlyCollection<Task> GetTasks()
         {
-            return _tasks;
+            return _tasks.AsReadOnly();
         }
 
+        public void AddTask(string description)
+        {
+            int id = TaskID.NextID();
+            Task task = new Task(id, description,false);
+            _tasks.Add(task);
+        }
 
     }
 }
