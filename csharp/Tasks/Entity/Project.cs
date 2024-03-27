@@ -30,8 +30,7 @@ namespace Tasks.Entity
 
         public void AddTask(string description)
         {
-            int id = TaskIdCounter.NextID();
-            Task task = new Task(id, description,false);
+            Task task = new Task(description,false);
             _tasks.Add(task);
         }
 

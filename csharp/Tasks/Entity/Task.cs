@@ -7,9 +7,9 @@ namespace Tasks.Entity
 {
     public class Task
     {
-        public Task(int id, string description, bool done)
+        public Task(string description, bool done)
         {
-            Id = id;
+            Id = TaskIdCounter.NextID();
             Description = description;
             Done = done;
         }

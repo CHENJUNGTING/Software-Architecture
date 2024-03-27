@@ -16,7 +16,7 @@ namespace Tasks.Adapter.Controller
             CommandReturnMessage commandReturnMessage = new CommandReturnMessage();
             CommandAddTask commandAddTask = new CommandAddTask();
             CommandAddTaskInput addTaskInput = new CommandAddTaskInput();
-            ProjectName projectName = new ProjectName(tokens[2]);
+            string projectName = tokens[2];
             addTaskInput.SetProjectName(projectName);
             addTaskInput.SetDescription(tokens[3]);
             commandReturnMessage = commandAddTask.Execute(addTaskInput);

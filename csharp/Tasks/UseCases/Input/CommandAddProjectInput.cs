@@ -14,9 +14,9 @@ namespace Tasks.UseCases.Input
         {
             return projectName;
         }
-        public void SetProjectName(ProjectName projectName)
+        public void SetProjectName(string projectName)
         {
-            this.projectName = projectName;
+            this.projectName = new ProjectName(projectName);
         }
     }
 }
