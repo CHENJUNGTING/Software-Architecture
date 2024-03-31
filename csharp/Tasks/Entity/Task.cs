@@ -2,32 +2,43 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection.Emit;
+using System.Threading.Tasks;
 
 namespace Tasks.Entity
 {
     public class Task
     {
-        public Task(string description, bool done)
+        private readonly TaskId id;
+        private readonly string description;
+        private bool done;
+
+        public Task(TaskId Id, string description, bool done)
         {
-            Id = TaskIdCounter.NextID();
-            Description = description;
-            Done = done;
+            this.id = Id;
+            this.description = description;
+            this.done = done;
         }
 
-        public int Id { get;}
-
-        public string Description { get; private set; }
-
-        public bool Done { get;private set; }
-
-        public void SetDescription(string description)
+        public TaskId GetId()
         {
-            this.Description = description;
+            return id;
+        }
+
+        public string GetDescription()
+        {
+            return description;
+        }
+
+
+        public bool IsDone()
+        {
+            return done;
         }
 
         public void SetDone(bool done)
         {
-            this.Done = done;
+            this.done = done;
         }
+
     }
 }

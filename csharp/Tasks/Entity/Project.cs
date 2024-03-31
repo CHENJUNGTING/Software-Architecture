@@ -23,14 +23,14 @@ namespace Tasks.Entity
             return _name;
         }
 
-        public  ReadOnlyCollection<Task> GetTasks()
+        public List<Task> GetTasks()
         {
-            return _tasks.AsReadOnly();
+            return _tasks;
         }
 
-        public void AddTask(string description)
+        public void AddTask(TaskId taskId, string description, bool done)
         {
-            Task task = new Task(description,false);
+            Task task = new Task(taskId, description,done);
             _tasks.Add(task);
         }
 

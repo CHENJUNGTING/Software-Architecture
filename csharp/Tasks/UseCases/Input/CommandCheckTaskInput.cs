@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Tasks.Entity;
 
 namespace Tasks.UseCases.Input
 {
     public class CommandCheckTaskInput : ICommandInput
     {
-        private int ID;
+        private TaskId ID;
         public int GetID()
         {
-            return ID;
+            return Convert.ToInt32(ID.Value);
         }
         public void SetID(int ID)
         {
-            this.ID = ID;
+            this.ID = TaskId.Of(ID);
         }
     }
 }

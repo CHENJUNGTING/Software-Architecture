@@ -22,7 +22,7 @@ namespace Tasks.UseCases.Command
                 foreach (var task in project.GetTasks())
                 {
                     // console.WriteLine("    [{0}] {1}: {2}: {3}", (task.Done ? 'x' : ' '), task.Id, task.Description, task.DeadLine.ToString("yyyy/MM/dd"));
-                    commandReturnMessage.AddMessage($"    [{(task.Done ? 'x' : ' ')}] {task.Id}: {task.Description}");
+                    commandReturnMessage.AddMessage($"    [{(task.IsDone() ? 'x' : ' ')}] {task.GetId()}: {task.GetDescription()}");
                 }
                 commandReturnMessage.AddMessage();
             }

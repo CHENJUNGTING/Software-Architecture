@@ -13,19 +13,20 @@ namespace Tasks.UseCases.Input
         {
             return projectName;
         }
-
+   
         public string GetDescription()
         {
             return description;
         }
+
         public void SetProjectName(string projectName)
         {
             this.projectName = new ProjectName(projectName);
         }
+
         public void SetDescription(string description)
         {
             this.description = description;
         }
-
     }
 }

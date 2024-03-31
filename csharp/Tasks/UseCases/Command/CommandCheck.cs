@@ -13,13 +13,13 @@ namespace Tasks.UseCases.Command
         {
             CommandReturnMessage commandReturnMessage = new CommandReturnMessage();
             TaskList taskList = TaskList.GetTaskList();
-            int iD = commandInput.GetID();
-            if(taskList.GetTaskById(iD) == null)
+            TaskId id = TaskId.Of(commandInput.GetID());
+            if(taskList.GetTaskById(id) == null)
             {
                 commandReturnMessage.AddMessage("Check Failed ID Not Find");
                 return commandReturnMessage;
             }
-            taskList.SetDone(iD, true);
+            taskList.SetDone(id, true);
             return commandReturnMessage;
         }
         public override string GetHelpString()

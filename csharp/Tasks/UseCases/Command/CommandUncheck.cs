@@ -14,7 +14,7 @@ namespace Tasks.UseCases.Command
         {
             CommandReturnMessage commandReturnMessage = new CommandReturnMessage();
             TaskList taskList = TaskList.GetTaskList();
-            int iD = commandInput.GetID();
+            TaskId iD = TaskId.Of(commandInput.GetID());
             if (taskList.GetTaskById(iD) == null)
             {
                 commandReturnMessage.AddMessage("Check Failed ID Not Find");

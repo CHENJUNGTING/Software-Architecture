@@ -17,8 +17,10 @@ namespace Tasks.Entity
     {
         private static TaskList taskList = null;
         private readonly List<Project> _projects = new List<Project>();
+        private static int lastTaskId = 1;
 
-        private TaskList() { }
+        private TaskList() {
+        }
 
         public static TaskList GetTaskList()
         {
@@ -29,44 +31,41 @@ namespace Tasks.Entity
             return taskList;
         }
 
-        public ReadOnlyCollection<Task> GetTasksByProjectName(ProjectName projectName)
+        public List<Task> GetTasksByProjectName(ProjectName projectName)
         {
-            foreach (Project project in _projects)
-            {
-                if (project.GetName() == projectName)
-                {
-                    return project.GetTasks();
-                }
-            }
-            return null;
+            return _projects
+                    .Where(project => project.GetName() == projectName)
+                    .SelectMany(project => project.GetTasks()
+                    .Select(task => new ReadOnlyTask(task.GetId(), task.GetDescription(), task.IsDone()) as Task))
+                    .ToList();
         }
 
-        public ReadOnlyCollection<Project> GetProjects()
+        public List<Project> GetProjects()
         {
-            return _projects.AsReadOnly();
+            return _projects.Select(project => new ReadOnlyProject(project.GetName(), project.GetTasks()) as Project).ToList();
         }
 
         private Project GetProjectByProjectName(ProjectName projectName)
         {
-            foreach (Project project in _projects)
+            var project = _projects.FirstOrDefault(project => project.GetName() == projectName);
+            if (project != null)
             {
-                if (project.GetName() == projectName)
-                {
-                    return project;
-                }
+                return new ReadOnlyProject(project.GetName(), project.GetTasks());
             }
             return null;
         }
 
-        public Task GetTaskById(int id)
+        public Task GetTaskById(TaskId id)
         {
 
             var identifiedTask = _projects
-                .Select(project => project.GetTasks().FirstOrDefault(task => task.Id == id))
+                .Select(project => project.GetTasks().FirstOrDefault(task => task.GetId() == id))
                 .Where(task => task != null)
                 .FirstOrDefault();
 
-            return identifiedTask;
+            if(identifiedTask != null)
+                return new ReadOnlyTask(identifiedTask.GetId(), identifiedTask.GetDescription(), identifiedTask.IsDone());
+            return null;
         }
 
         public void AddProject(ProjectName name)
@@ -76,16 +75,28 @@ namespace Tasks.Entity
 
         }
 
-        public void AddTask(ProjectName projectName,string description)
+        public void AddTask(ProjectName projectName, string description, bool done)
         {
-            GetProjectByProjectName(projectName).AddTask(description);
+            GetProjectByProjectName(projectName).AddTask(TaskId.Of(NextTaskId()),description,done);
         }
 
-        public void SetDone(int id, bool done)
+        public void SetDone(TaskId id, bool done)
         {
-            Task task = GetTaskById(id);
+            Task task = _projects
+                .Select(project => project.GetTasks().FirstOrDefault(task => task.GetId() == id))
+                .Where(task => task != null)
+                .FirstOrDefault();
+
             task.SetDone(done);
         }
-
+        private int NextTaskId()
+        {
+            return lastTaskId++;
+        }
+        
+        public TaskId GetTaskId()
+        {
+            return TaskId.Of(lastTaskId);
+        }
     }
 }
