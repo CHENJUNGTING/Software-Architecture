@@ -8,7 +8,7 @@ namespace Tasks.Entity
     {
         public ReadOnlyTask(TaskId taskId, string description, bool done):base(taskId,description,done) { 
         }
-        public void SetDone(bool done)
+        public override void SetDone(bool done)
         {
             throw new Exception("Cannot modify task because it is readonly");
         }

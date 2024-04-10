@@ -35,7 +35,7 @@ namespace Tasks.Entity
             return done;
         }
 
-        public void SetDone(bool done)
+        public virtual void SetDone(bool done)
         {
             this.done = done;
         }

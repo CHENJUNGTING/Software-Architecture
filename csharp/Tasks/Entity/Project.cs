@@ -10,7 +10,7 @@ namespace Tasks.Entity
     public class Project
     {
         private readonly ProjectName _name;
-        private readonly List<Task> _tasks;
+        protected readonly List<Task> _tasks;
 
         public Project(ProjectName name, List<Task> tasks)
         {
@@ -23,7 +23,7 @@ namespace Tasks.Entity
             return _name;
         }
 
-        public List<Task> GetTasks()
+        public virtual List<Task> GetTasks()
         {
             return _tasks;
         }
